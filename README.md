@@ -4,5 +4,5 @@
 工具配置参数在config.js中。
 # 使用
 ------------
-cd c-jsdoc
-node cdoc
+	cd c-jsdoc
+	node cdoc
