@@ -1,0 +1,43 @@
+
+var data = {
+	file: "test.js",
+	module: null,
+	/**
+	 * {
+	 * 	author: "",
+	 * 	name: "ClassName",
+	 * 	static: false,
+	 * 	extends: "",
+	 * 	version: "°æ±¾"
+	 * 	since: "",
+	 *  see: "",
+	 *  example: "",
+	 *  requires: []
+	 * }
+	 */
+	clazz: {},
+	/**
+	 * {
+	 * 	type: "String",
+	 * 	name: "prop",
+	 *  default: "value",
+	 *  desc: "ssssssssss",
+	 *  final: false,
+	 *  deprecated: false,
+	 *  example: ""
+	 * }
+	 */
+	properties: [],
+	/**
+	 * {
+	 * 	name: "method",
+	 * 	type: "private/public/protected",
+	 * 	constructor: false,
+	 * 	params: [],
+	 *  return: {},
+	 *  des: "ssssssssss",
+	 *  example: ""
+	 * }
+	 */
+	methods: []
+};
