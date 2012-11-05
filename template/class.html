@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title><%= data.class.class %> 类</title>
+		<script src="../lib/jquery-1.7.1.min.js"></script>
+		<script src="../lib/index.js"></script>
+		<link rel="stylesheet" href="../lib/style.css">
+	</head>
+	<body>
+		<div id="header">
+			<div class="title"><h2><%= config.title %></h2></div>
+			<div class="info"><h3>API for version <%= config.version %></h3></div>
+		</div>
+		<div class="section">
+			<div class="left">
+				<div id="api-list" class="sidebar">
+					<h2 class="off-left">APIs</h2>
+					<div class="tabview" style="">
+						<div class="tabview-content">
+							<ul class="tabs">
+						        <li class="">
+						        	<a href="#api-classes" class="tab-label">Classes</a>
+								</li>
+							</ul>
+					        <div id="api-tabview-filter">
+					            <input type="search" id="api-filter" placeholder="Type to filter APIs" autocomplete="off" tabindex="0">
+					        </div>
+					        <div id="api-tabview-panel" class="yui3-tabview-panel">
+						        <ul id="api-classes" class="apis classes tab-panel">
+						        	<% classlist.forEach(function(clazz){ %>
+						        	<li class="api-list-item class">
+						        		<a href="<%= clazz.class.class %>.html" tabindex="-1"><%= clazz.class.class %></a>
+									</li>
+									<% }) %>
+								</ul>
+							</div>
+    					</div>
+					</div>
+				</div>
+			</div>
+			<div class="right">
+				
+				
+				<h1>类 <%= data.class.class %></h1>
+				<div class="box meta">
+					<div class="foundat">
+		            	类源代码: <a href="../files/<%= data.filepath %>.html"><code><%= data.file %></code></a>
+		        	</div>
+					<!--模块:<a href="../modules/<%= data.module %>.html"><%= data.module %></a>-->
+				</div>
+				<div class="box intro">
+				    <p>
+				    	<%= data.class.desc %>
+					</p>
+				</div>
+				<div id="tab">
+					<ul class="tab_title">
+						<li class="tab_bt"><a href="#index">Index</a></li>
+						<% if(data.property && data.property.length){ %>
+						<li class="tab_bt"><a href="#property">属性</a></li>
+						<% } %>
+						<% if(data.method && data.method.length){ %>
+						<li class="tab_bt"><a href="#method">方法</a></li>
+						<% } %>
+					</ul>
+					<div id="index" class="tab_cont">
+						<h3>Item Index</h3>
+						<div>
+							<% if(data.method && data.method.length){ %>
+							<h2 style="border-bottom: 1px solid #EFEFEF; padding: 2px 8px; font-size: 13px;">方法:</h2>
+							<ul class="nav">
+								<% data.method.forEach(function(method){ %>
+									<li class="item method"><a href="#method_<%= method.method %>"><%= method.method %></a></li>
+								<% }) %>
+							</ul>
+							<% } %>
+							<% if(data.property && data.property.length){ %>
+							<h2 style="border-bottom: 1px solid #EFEFEF; padding: 2px 8px; font-size: 13px;">属性:</h2>
+							<ul class="nav">
+								<% data.property.forEach(function(property){ %>
+								<li class="item property"><a href="#propert_<%= property.property %>"><%= property.property %></a></li>
+								<% }) %>
+							</ul>
+							<% } %>
+						</div>
+					</div>
+					<% if(data.property && data.property.length){ %>
+					<div id="property" class="tab_cont">
+						<% data.property.forEach(function(property){ %>
+						<div id="property_<%= property.property %>" class="property_item">
+							<h3 class="name">
+		    					<code><%= property.property %></code>
+							</h3>
+							<span class="type">
+								<a class="crosslink external" target="_blank">
+									<%= property.type %>
+								</a>
+							</span>
+						    <div class="meta">
+				                <p>Defined in
+							        <a href="../files/<%= data.filepath %>.html#L<%= property.linenum %>"><code><%= data.file %>:<%= property.linenum %></code></a>
+						        </p>
+					    	</div>
+						    <div class="description">
+				        		<p><%= property.desc %></p>
+				    		</div>
+						</div>
+						<% }) %>
+					</div>
+					<% } %>
+					
+					<% if(data.method && data.method.length){ %>
+					<div id="method" class="tab_cont">
+						<% data.method.forEach(function(method){ %>
+						<div id="method_<%= method.method %>" class="method_item">
+		    				<h3 class="name">
+		    					<code><%= method.method %></code>
+							</h3>
+					        <div class="args">
+			            		<span class="paren">(</span>
+								<ul class="args-list inline commas">
+									<% method.param.forEach(function(param){ %>
+					                <li class="arg">
+				                        <code><%= param.name %></code>
+					                </li>
+									<% }) %>
+					            </ul>
+								<span class="paren">)</span>
+			        		</div>
+						    <div class="meta">
+				                <p>Defined in
+							        <a href="../files/<%= data.filepath %>.html#L<%= method.linenum %>"><code><%= data.file %>:<%= method.linenum %></code></a>
+						        </p>
+					    	</div>
+						    <div class="description">
+				        		<p><%= method.desc %></p>
+				    		</div>
+					        <div class="params">
+				            	<h4>Parameters:</h4>
+					            <ul class="params-list">
+					            	<% method.param.forEach(function(param){ %>
+					                <li class="param">
+				                        <code class="param-name"><%= param.name %></code>
+				                        <span class="type"><%= param.type %></span>
+					                    <div class="param-description">
+				                        	<p><%= param.desc %></p>
+										</div>
+					                </li>
+									<% }) %>
+					            </ul>
+				        	</div>
+						</div>
+						<% }) %>
+						
+						
+					</div>
+					<% } %>
+				</div>
+				
+				
+				
+			</div>
+		</div>
+	</body>
+</html>
